@@ -8,7 +8,7 @@ public class HappinessMapper {
 
     public Happy toHappy(Affirmation affirmation) {
         return ImmutableHappy.builder()
-                .message(affirmation.getMessage())
+                .message(affirmation.getAffirmation())
                 .build();
     }
 }

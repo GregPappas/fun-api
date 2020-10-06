@@ -1,18 +1,23 @@
 package com.pappas.apifun.application;
 
-import com.pappas.apifun.acl.ImmutableAffirmation;
+import com.pappas.apifun.acl.Affirmation;
+import com.pappas.apifun.adapter.AffirmationsHttpClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmotionalChangesApplicationService {
 
     private HappinessMapper happinessMapper;
+    private AffirmationsHttpClient affirmationsHttpClient;
 
-    public EmotionalChangesApplicationService(HappinessMapper happinessMapper) {
+    public EmotionalChangesApplicationService(HappinessMapper happinessMapper,
+                                              AffirmationsHttpClient affirmationsHttpClient) {
         this.happinessMapper = happinessMapper;
+        this.affirmationsHttpClient = affirmationsHttpClient;
     }
 
     public Happy findHappiness() {
-        return happinessMapper.toHappy(ImmutableAffirmation.builder().message("this is a happy message").build());
+        Affirmation affirmation = affirmationsHttpClient.get();
+        return happinessMapper.toHappy(affirmation);
     }
 }

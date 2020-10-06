@@ -17,7 +17,7 @@ public class Builders {
 
     public static Affirmation buildAffirmation() {
         return ImmutableAffirmation.builder()
-                .message(MESSAGE)
+                .affirmation(MESSAGE)
                 .build();
     }
 }
