@@ -8,10 +8,12 @@ import com.pappas.apifun.application.ImmutableHappy;
 public class Builders {
 
     private static final String MESSAGE = "this is a happy message";
+    private static final String DOG_PICTURE = "http://url-for-a-random-dog-picture.com";
 
     public static Happy buildHappy() {
         return ImmutableHappy.builder()
                 .message(MESSAGE)
+                .dogPicture(DOG_PICTURE)
                 .build();
     }
 

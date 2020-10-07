@@ -9,4 +9,5 @@ import org.immutables.value.Value;
 @JsonDeserialize(as = ImmutableHappy.class)
 public abstract class Happy {
     public abstract String getMessage();
+    public abstract String dogPicture();
 }
