@@ -12,6 +12,8 @@ the idea is that if you're feeling a little down you can hit `/happiness` and yo
 * We're currently missing some canned responses to be served by something like wiremock in order to be able to validate against the clients. 
 
 ## how to build & run
+   The application is built with a flavour of java 11 as it's preference and
+    requires that the jdk be installed on the machine prior to running.  
    this application uses spring-boot 2.3 to run
    and is built using maven, there's a packaged maven wrapper included which is set to use version 3.6.2
    * to install `./mvnw clean install`
