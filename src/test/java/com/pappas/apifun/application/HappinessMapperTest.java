@@ -14,7 +14,7 @@ class HappinessMapperTest {
         //setup
         HappinessMapper happinessMapper = new HappinessMapper();
         //act
-        Happy result = happinessMapper.toHappy(Builders.buildAffirmation());
+        Happy result = happinessMapper.toHappy(Builders.buildAffirmation(), Builders.buildDog());
         //verify
         assertThat(result).isEqualTo(Builders.buildHappy());
     }

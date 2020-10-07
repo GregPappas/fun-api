@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.pappas.apifun.adapter.AffirmationsHttpClient;
+import com.pappas.apifun.adapter.DogHttpClient;
 import com.pappas.apifun.test_objects.Builders;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,15 +13,18 @@ import org.junit.jupiter.api.Test;
 class EmotionalChangesApplicationServiceTest {
 
     private AffirmationsHttpClient affirmationsHttpClient = mock(AffirmationsHttpClient.class);
+    private DogHttpClient dogHttpClient = mock(DogHttpClient.class);
 
     @DisplayName("verify that when an Affirmation is returned from the affirmation client then it is converted into a Happy object")
     @Test
     public void testAffirmation() {
         //setup
         when(affirmationsHttpClient.get()).thenReturn(Builders.buildAffirmation());
+        when(dogHttpClient.findRandomDogPicture()).thenReturn(Builders.buildDog());
 
         HappinessMapper happinessMapper = new HappinessMapper();
-        EmotionalChangesApplicationService emotionalChangesApplicationService = new EmotionalChangesApplicationService(happinessMapper, affirmationsHttpClient);
+        EmotionalChangesApplicationService emotionalChangesApplicationService =
+                new EmotionalChangesApplicationService(happinessMapper, affirmationsHttpClient, dogHttpClient);
         //act
         Happy happy = emotionalChangesApplicationService.findHappiness();
         //verify

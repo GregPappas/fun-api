@@ -33,6 +33,9 @@ public class EmotionalChangesControllerTest {
     private AffirmationsHttpClient affirmationsHttpClient;
 
     @Autowired
+    private DogHttpClient dogHttpClient;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @DisplayName("verify that 200 and a deserializable Happy Object is returned when requested")
@@ -40,6 +43,7 @@ public class EmotionalChangesControllerTest {
     public void happyPath() throws Exception {
 
         when(affirmationsHttpClient.get()).thenReturn(Builders.buildAffirmation());
+        when(dogHttpClient.findRandomDogPicture()).thenReturn(Builders.buildDog());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/happiness")
                 .accept(MediaType.APPLICATION_JSON))
@@ -56,10 +60,13 @@ public class EmotionalChangesControllerTest {
     public static class ControllerConfiguration {
 
         @Bean
-        public AffirmationsHttpClient getAffirmationsHttpClient() {
+        public AffirmationsHttpClient affirmationsHttpClient() {
             return mock(AffirmationsHttpClient.class);
         }
+
+        @Bean
+        public DogHttpClient dogHttpClient() {
+            return mock(DogHttpClient.class);
+        }
     }
-
-
 }

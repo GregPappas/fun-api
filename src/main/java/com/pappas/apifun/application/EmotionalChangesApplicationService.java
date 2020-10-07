@@ -1,23 +1,29 @@
 package com.pappas.apifun.application;
 
 import com.pappas.apifun.acl.Affirmation;
+import com.pappas.apifun.acl.Dog;
 import com.pappas.apifun.adapter.AffirmationsHttpClient;
+import com.pappas.apifun.adapter.DogHttpClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmotionalChangesApplicationService {
 
-    private HappinessMapper happinessMapper;
-    private AffirmationsHttpClient affirmationsHttpClient;
+    private final HappinessMapper happinessMapper;
+    private final AffirmationsHttpClient affirmationsHttpClient;
+    private final DogHttpClient dogHttpClient;
 
     public EmotionalChangesApplicationService(HappinessMapper happinessMapper,
-                                              AffirmationsHttpClient affirmationsHttpClient) {
+                                              AffirmationsHttpClient affirmationsHttpClient,
+                                              DogHttpClient dogHttpClient) {
         this.happinessMapper = happinessMapper;
         this.affirmationsHttpClient = affirmationsHttpClient;
+        this.dogHttpClient = dogHttpClient;
     }
 
     public Happy findHappiness() {
         Affirmation affirmation = affirmationsHttpClient.get();
-        return happinessMapper.toHappy(affirmation);
+        Dog dog = dogHttpClient.findRandomDogPicture();
+        return happinessMapper.toHappy(affirmation, dog);
     }
 }

@@ -1,17 +1,16 @@
 package com.pappas.apifun.application;
 
 import com.pappas.apifun.acl.Affirmation;
+import com.pappas.apifun.acl.Dog;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HappinessMapper {
 
-    private static final String DOG_PICTURE_URL = "http://url-for-a-random-dog-picture.com";
-
-    public Happy toHappy(Affirmation affirmation) {
+    public Happy toHappy(Affirmation affirmation, Dog dog) {
         return ImmutableHappy.builder()
                 .message(affirmation.getAffirmation())
-                .dogPicture(DOG_PICTURE_URL)
+                .dogPicture(dog.getMessage())
                 .build();
     }
 }
